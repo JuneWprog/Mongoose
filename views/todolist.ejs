@@ -1,0 +1,34 @@
+<%-include ("header");-%>
+<body>
+    <div class="box" id="heading">
+        <% if (listTitle==="Saturday" || listTitle==="Sunday"){ %>
+            <h1 style="color: purple;"><%= listTitle %> Todo List</h1>
+        <% } else{  %>
+            <h1 style="color:blue;"><%=listTitle  %> </h1>
+        <% } %>
+    </div>
+    <!-- <div class="hint">
+        <p>Edit your list item </p>
+        <p>Add new item to list press +</p>
+        <p>Delete one item check the checkbox</p>
+    </div> -->
+    <div class="box">
+        <%newItems.forEach((item)=>{%>
+            <form class="itemCheck" action="/delete" method="POST">
+                <div class="item"> 
+                
+                    <input type="checkbox"name="checkbox"  onChange="this.form.submit()" value=<%= item._id %>>
+                    <p> <%= item.name %></p> 
+                    <input type="hidden" name="title" value=<%=listTitle%>></input>
+                
+                </div>
+            </form>
+        <%}) %>
+        
+        <form class="item" action="/" method="POST">
+            <input type="text" name="newItem"placeholder="New Item" autocomplete="off" autofocus>
+            <button type="submit" name="list" value=<%= listTitle %>>+</button>
+        </form>
+    </div>
+
+<%-include ("footer");-%>
